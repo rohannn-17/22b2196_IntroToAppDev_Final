@@ -1,4 +1,4 @@
-import 'package:flutter_fcm/expense.dart';
+import 'package:flutter_fcm/models/expense.dart';
 
 class Gain {
   final String username;

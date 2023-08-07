@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_fcm/screens/home/gain.dart';
+import 'package:flutter_fcm/models/gain.dart';
 import 'package:provider/provider.dart';
 
 class GainList extends StatefulWidget {

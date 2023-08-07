@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_fcm/database.dart';
-import 'package:flutter_fcm/expense.dart';
+import 'package:flutter_fcm/models/expense.dart';
 
 import 'models/info.dart';
 
@@ -32,8 +32,12 @@ class AuthService {
           email: email, password: password);
       User? user = result.user;
       print(user!.uid);
-      await Database(uid: user?.uid).updateUser(
-          'new user', [Expense(category: 'salary', expense: '100000')]);
+      List<Expense> Exp = []
+          .map((dynamic item) =>
+              Expense(category: item.category, expense: item.expense))
+          .toList();
+
+      await Database(uid: user?.uid).updateUser('new user', Exp);
       return _FirebaseUser(user);
     } catch (e) {
       print(e.toString());

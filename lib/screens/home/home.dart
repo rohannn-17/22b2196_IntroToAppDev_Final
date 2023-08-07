@@ -2,7 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_fcm/auth.dart';
 import 'package:flutter_fcm/database.dart';
-import 'package:flutter_fcm/screens/home/gain.dart';
+import 'package:flutter_fcm/models/gain.dart';
+import 'package:flutter_fcm/screens/home/budget.dart';
 import 'package:flutter_fcm/screens/home/gainlist.dart';
 import 'package:provider/provider.dart';
 
@@ -17,8 +18,10 @@ class Home extends StatelessWidget {
       value: Database().gains,
       initialData: null,
       child: Scaffold(
+        backgroundColor: Color.fromARGB(255, 158, 148, 239),
         appBar: AppBar(
-          backgroundColor: Colors.brown,
+          elevation: 20,
+          backgroundColor: Color.fromARGB(255, 135, 75, 224),
           title: const Text(
             'Budget Tracker',
             style: TextStyle(
@@ -41,6 +44,9 @@ class Home extends StatelessWidget {
               onPressed: () async {
                 await _auth.signOut();
               },
+            ),
+            SizedBox(
+              width: 10,
             )
           ],
         ),
@@ -54,6 +60,7 @@ class Home extends StatelessWidget {
                   children: [
                     CircleAvatar(
                       child: Icon(Icons.person, size: 150, color: Colors.black),
+                      backgroundColor: Colors.transparent,
                     ),
                     SizedBox(
                       width: 110,
@@ -62,7 +69,7 @@ class Home extends StatelessWidget {
                 ),
                 const SizedBox(height: 120),
                 const Text(
-                  'hey rohan,',
+                  'hey ,',
                   style: TextStyle(fontFamily: 'Marker', fontSize: 27),
                 ),
                 const SizedBox(
@@ -108,7 +115,10 @@ class Home extends StatelessWidget {
                           RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(20)))),
                   onPressed: () {
-                    dynamic result = Navigator.pushNamed(context, '/Budget');
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => Budget()),
+                    );
                   },
                   child: const Padding(
                     padding: EdgeInsets.all(8.0),

@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter_fcm/screens/home/gain.dart';
-import 'expense.dart';
+import 'package:flutter_fcm/models/gain.dart';
+import 'models/expense.dart';
 
 class Database {
   final String? uid;
@@ -18,9 +18,19 @@ class Database {
 
   List<Gain> _gainList(QuerySnapshot snapshot) {
     return snapshot.docs.map((doc) {
+      List<Expense> Exp = []
+          .map((dynamic item) =>
+              Expense(category: item.category, expense: item.expense))
+          .toList();
+
+      List<dynamic> expensesJson = doc.get('Expenses') ?? Exp;
+      List<Expense> expenses = expensesJson
+          .map((expense) => Expense.fromJson(expense))
+          .cast<Expense>()
+          .toList();
+
       return Gain(
-          username: doc.get('username') ?? 'new user',
-          Expenses: doc.get('username') ?? []);
+          username: doc.get('username') ?? 'new user', Expenses: expenses);
     }).toList();
   }
 
